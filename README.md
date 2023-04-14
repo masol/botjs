@@ -16,39 +16,42 @@ oclif example Hello World CLI
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g boc
-$ boc COMMAND
+$ npm install -g bot
+$ bot COMMAND
 running command...
-$ boc (--version)
-boc/0.0.0 linux-x64 node-v18.12.1
-$ boc --help [COMMAND]
+$ bot (--version)
+bot/0.0.0 linux-x64 node-v18.12.1
+$ bot --help [COMMAND]
 USAGE
-  $ boc COMMAND
+  $ bot COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`boc hello PERSON`](#boc-hello-person)
-* [`boc hello world`](#boc-hello-world)
-* [`boc help [COMMANDS]`](#boc-help-commands)
-* [`boc plugins`](#boc-plugins)
-* [`boc plugins:install PLUGIN...`](#boc-pluginsinstall-plugin)
-* [`boc plugins:inspect PLUGIN...`](#boc-pluginsinspect-plugin)
-* [`boc plugins:install PLUGIN...`](#boc-pluginsinstall-plugin-1)
-* [`boc plugins:link PLUGIN`](#boc-pluginslink-plugin)
-* [`boc plugins:uninstall PLUGIN...`](#boc-pluginsuninstall-plugin)
-* [`boc plugins:uninstall PLUGIN...`](#boc-pluginsuninstall-plugin-1)
-* [`boc plugins:uninstall PLUGIN...`](#boc-pluginsuninstall-plugin-2)
-* [`boc plugins update`](#boc-plugins-update)
+- [oclif-hello-world](#oclif-hello-world)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`bot hello PERSON`](#bot-hello-person)
+  - [`bot hello world`](#bot-hello-world)
+  - [`bot help [COMMANDS]`](#bot-help-commands)
+  - [`bot plugins`](#bot-plugins)
+  - [`bot plugins:install PLUGIN...`](#bot-pluginsinstall-plugin)
+  - [`bot plugins:inspect PLUGIN...`](#bot-pluginsinspect-plugin)
+  - [`bot plugins:install PLUGIN...`](#bot-pluginsinstall-plugin-1)
+  - [`bot plugins:link PLUGIN`](#bot-pluginslink-plugin)
+  - [`bot plugins:uninstall PLUGIN...`](#bot-pluginsuninstall-plugin)
+  - [`bot plugins:uninstall PLUGIN...`](#bot-pluginsuninstall-plugin-1)
+  - [`bot plugins:uninstall PLUGIN...`](#bot-pluginsuninstall-plugin-2)
+  - [`bot plugins update`](#bot-plugins-update)
 
-## `boc hello PERSON`
+## `bot hello PERSON`
 
 Say hello
 
 ```
 USAGE
-  $ boc hello PERSON -f <value>
+  $ bot hello PERSON -f <value>
 
 ARGUMENTS
   PERSON  Person to say hello to
@@ -64,31 +67,31 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/masol/boc/blob/v0.0.0/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/masol/bot/blob/v0.0.0/dist/commands/hello/index.ts)_
 
-## `boc hello world`
+## `bot hello world`
 
 Say hello world
 
 ```
 USAGE
-  $ boc hello world
+  $ bot hello world
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ boc hello world
+  $ bot hello world
   hello world! (./src/commands/hello/world.ts)
 ```
 
-## `boc help [COMMANDS]`
+## `bot help [COMMANDS]`
 
-Display help for boc.
+Display help for bot.
 
 ```
 USAGE
-  $ boc help [COMMANDS] [-n]
+  $ bot help [COMMANDS] [-n]
 
 ARGUMENTS
   COMMANDS  Command to show help for.
@@ -97,18 +100,18 @@ FLAGS
   -n, --nested-commands  Include all nested commands in the output.
 
 DESCRIPTION
-  Display help for boc.
+  Display help for bot.
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.2.9/src/commands/help.ts)_
 
-## `boc plugins`
+## `bot plugins`
 
 List installed plugins.
 
 ```
 USAGE
-  $ boc plugins [--core]
+  $ bot plugins [--core]
 
 FLAGS
   --core  Show core plugins.
@@ -117,18 +120,18 @@ DESCRIPTION
   List installed plugins.
 
 EXAMPLES
-  $ boc plugins
+  $ bot plugins
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v2.4.4/src/commands/plugins/index.ts)_
 
-## `boc plugins:install PLUGIN...`
+## `bot plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ boc plugins:install PLUGIN...
+  $ bot plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -150,23 +153,23 @@ DESCRIPTION
 
 
 ALIASES
-  $ boc plugins add
+  $ bot plugins add
 
 EXAMPLES
-  $ boc plugins:install myplugin 
+  $ bot plugins:install myplugin 
 
-  $ boc plugins:install https://github.com/someuser/someplugin
+  $ bot plugins:install https://github.com/someuser/someplugin
 
-  $ boc plugins:install someuser/someplugin
+  $ bot plugins:install someuser/someplugin
 ```
 
-## `boc plugins:inspect PLUGIN...`
+## `bot plugins:inspect PLUGIN...`
 
 Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ boc plugins:inspect PLUGIN...
+  $ bot plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN  [default: .] Plugin to inspect.
@@ -182,16 +185,16 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ boc plugins:inspect myplugin
+  $ bot plugins:inspect myplugin
 ```
 
-## `boc plugins:install PLUGIN...`
+## `bot plugins:install PLUGIN...`
 
 Installs a plugin into the CLI.
 
 ```
 USAGE
-  $ boc plugins:install PLUGIN...
+  $ bot plugins:install PLUGIN...
 
 ARGUMENTS
   PLUGIN  Plugin to install.
@@ -213,23 +216,23 @@ DESCRIPTION
 
 
 ALIASES
-  $ boc plugins add
+  $ bot plugins add
 
 EXAMPLES
-  $ boc plugins:install myplugin 
+  $ bot plugins:install myplugin 
 
-  $ boc plugins:install https://github.com/someuser/someplugin
+  $ bot plugins:install https://github.com/someuser/someplugin
 
-  $ boc plugins:install someuser/someplugin
+  $ bot plugins:install someuser/someplugin
 ```
 
-## `boc plugins:link PLUGIN`
+## `bot plugins:link PLUGIN`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ boc plugins:link PLUGIN
+  $ bot plugins:link PLUGIN
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -247,16 +250,16 @@ DESCRIPTION
 
 
 EXAMPLES
-  $ boc plugins:link myplugin
+  $ bot plugins:link myplugin
 ```
 
-## `boc plugins:uninstall PLUGIN...`
+## `bot plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ boc plugins:uninstall PLUGIN...
+  $ bot plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -269,17 +272,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ boc plugins unlink
-  $ boc plugins remove
+  $ bot plugins unlink
+  $ bot plugins remove
 ```
 
-## `boc plugins:uninstall PLUGIN...`
+## `bot plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ boc plugins:uninstall PLUGIN...
+  $ bot plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -292,17 +295,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ boc plugins unlink
-  $ boc plugins remove
+  $ bot plugins unlink
+  $ bot plugins remove
 ```
 
-## `boc plugins:uninstall PLUGIN...`
+## `bot plugins:uninstall PLUGIN...`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ boc plugins:uninstall PLUGIN...
+  $ bot plugins:uninstall PLUGIN...
 
 ARGUMENTS
   PLUGIN  plugin to uninstall
@@ -315,17 +318,17 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ boc plugins unlink
-  $ boc plugins remove
+  $ bot plugins unlink
+  $ bot plugins remove
 ```
 
-## `boc plugins update`
+## `bot plugins update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ boc plugins update [-h] [-v]
+  $ bot plugins update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
