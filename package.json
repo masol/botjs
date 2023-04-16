@@ -2,7 +2,7 @@
   "name": "@masol/bot",
   "version": "0.0.1",
   "description": "Tools for behavior-oriented software engineering methodology.\nMore information, please visit https://pinyan.tech",
-  "author": "masol @masol",
+  "author": "lizhutang",
   "bin": {
     "bot": "./bin/run"
   },
@@ -19,11 +19,13 @@
   "dependencies": {
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
-    "@oclif/plugin-plugins": "^2.4.4"
+    "@oclif/plugin-plugins": "^2.4.4",
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
     "@oclif/test": "^2.3.14",
     "@types/chai": "^4",
+    "@types/fs-extra": "^11.0.1",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.18.23",
     "chai": "^4",
@@ -44,13 +46,7 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
-    ],
-    "topicSeparator": ":",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    ]
   },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",

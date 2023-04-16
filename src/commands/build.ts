@@ -1,4 +1,5 @@
 import {Args, Command, Flags} from '@oclif/core'
+import Store from '../store'
 
 const DestHelp = `Directory for generated source code.
 The default value is PWD`
@@ -20,7 +21,8 @@ export default class Build extends Command {
     dest: Flags.directory({char: 'o', description: DestHelp}),
     src: Flags.directory({char: 'i', description: SrcHelp}),
     // flag with no value (-f, --force)
-    warning: Flags.string({char: 'w',
+    warning: Flags.string({
+      char: 'w',
       description: 'Options to Request or Suppress Warnings',
       options: ['error', 'ignore', 'show'],
     }),
@@ -45,6 +47,7 @@ export default class Build extends Command {
 
   public async run(): Promise<void> {
     const {args, flags} = await this.parse(Build)
+    await Store.inst.load(args, flags, this)
     this.log(JSON.stringify(flags))
     // this.log(flags)
 
