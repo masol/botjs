@@ -40,7 +40,7 @@ class Env implements EnvType {
 
   async load(args: Record<string, any>, flags: Record<string, any>, cmd: Command): Promise<boolean> {
     this.#cmd = cmd
-    const ensureFull = (pathname: string) => {
+    const ensureFull = (pathname: string = "") => {
       if (!path.isAbsolute(pathname)) {
         return path.join(process.cwd(), pathname)
       }
