@@ -13,19 +13,19 @@ import path from 'node:path'
 import fse from 'fs-extra'
 import fsutil from '../../utils/fse'
 import type {Command} from '@oclif/core'
+import parser from '../parser'
 
-type EnvType = import('./index.d').Env
+type EnvType = import('./index.d').Env;
 class Env implements EnvType {
-  #src: string
-  #dest: string
-  #cmd?: Command
+  #src: string;
+  #dest: string;
+  #cmd?: Command;
   get src(): string {
     return this.#src
   }
 
   get cmd(): Command {
-    if (!this.#cmd)
-      throw new Error('Cmd not init!')
+    if (!this.#cmd) throw new Error('Cmd not init!')
     return this.#cmd
   }
 
@@ -38,7 +38,11 @@ class Env implements EnvType {
     this.#dest = ''
   }
 
-  async load(args: Record<string, any>, flags: Record<string, any>, cmd: Command): Promise<boolean> {
+  async load(
+    args: Record<string, any>,
+    flags: Record<string, any>,
+    cmd: Command,
+  ): Promise<boolean> {
     this.#cmd = cmd
     const ensureFull = (pathname = '') => {
       if (!path.isAbsolute(pathname)) {
@@ -49,9 +53,11 @@ class Env implements EnvType {
     }
 
     const src = ensureFull(flags.src || args.src)
-    const dest = ensureFull(flags.dest || args.dest || path.join(src, 'target'))
+    const dest = ensureFull(
+      flags.dest || args.dest || path.join(src, 'target'),
+    )
 
-    if (!await fse.pathExists(src)) {
+    if (!(await fse.pathExists(src))) {
       this.#cmd.error(`Source directory '${src}' not exist!`, {exit: 1})
     }
 
@@ -62,16 +68,22 @@ class Env implements EnvType {
     const destExist = await fse.pathExists(dest)
     if (destExist) {
       if (!(await fse.lstat(dest)).isDirectory()) {
-        this.#cmd.error(`Destination directory '${dest}' not a dirctory!`, {exit: 3})
+        this.#cmd.error(`Destination directory '${dest}' not a dirctory!`, {
+          exit: 3,
+        })
       }
 
-      if (!await fsutil.isEmptyDir(dest)) {
-        this.#cmd.error(`Destination directory '${dest}' not empty!`, {exit: 4})
+      if (!(await fsutil.isEmptyDir(dest))) {
+        this.#cmd.error(`Destination directory '${dest}' not empty!`, {
+          exit: 4,
+        })
       }
     }
 
     this.#src = src
     this.#dest = dest
+
+    await parser.load()
     return true
   }
 }
