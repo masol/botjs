@@ -12,8 +12,8 @@
 import type {Command} from '@oclif/core'
 
 export type Store = {
-  readonly workflows: import('./workflow/index.d').Workflows,
-  readonly dtds: import('./dtd/index.d').Dtds,
-  readonly env: import('./env/index.d').Env
+  readonly workflows: import('./types/workflow').Workflows,
+  readonly dtds: import('./types/dtd').Dtds,
+  readonly env: import('./types/env').Env
   load(args: Record<string, any>, flags: Record<string, any>, cmd: Command): Promise<boolean>
 }

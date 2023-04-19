@@ -13,15 +13,30 @@ import path from 'node:path'
 import fse from 'fs-extra'
 import fsutil from '../../utils/fse'
 import type {Command} from '@oclif/core'
-import parser from '../parser'
+import {load} from '../parser'
+import {mkdtempSync} from 'node:fs'
+import {tmpdir} from 'node:os'
 
-type EnvType = import('./index.d').Env;
+// tempy is ESM only.
+// import {temporaryDirectory} from 'tempy'
+
+type EnvType = import('../types/env').Env;
 class Env implements EnvType {
   #src: string;
   #dest: string;
   #cmd?: Command;
+  #tmpDir?: string
+  #keeptmp?: boolean
   get src(): string {
     return this.#src
+  }
+
+  get tmpDir(): string {
+    if (!this.#tmpDir) {
+      this.#tmpDir = mkdtempSync(path.join(tmpdir(), 'bot-'))
+    }
+
+    return this.#tmpDir
   }
 
   get cmd(): Command {
@@ -38,33 +53,35 @@ class Env implements EnvType {
     this.#dest = ''
   }
 
+  async clear(): Promise<void> {
+    if (!this.#keeptmp && this.#tmpDir) {
+      await fse.remove(this.#tmpDir)
+    }
+  }
+
   async load(
     args: Record<string, any>,
     flags: Record<string, any>,
     cmd: Command,
   ): Promise<boolean> {
+    this.#keeptmp = flags.keeptmp || false
     this.#cmd = cmd
-    const ensureFull = (pathname = '') => {
-      if (!path.isAbsolute(pathname)) {
-        return path.join(process.cwd(), pathname)
+
+    const src = fsutil.fullPath(flags.src || args.src)
+    const srcIsURL = fsutil.isURL(src)
+    if (!srcIsURL) {
+      if (!(await fse.pathExists(src))) {
+        this.#cmd.error(`Source file '${src}' not exist!`, {exit: 1})
       }
 
-      return pathname
+      if (!(await fse.lstat(src)).isFile()) {
+        this.#cmd.error(`Source file '${src}' not a file!`, {exit: 2})
+      }
     }
 
-    const src = ensureFull(flags.src || args.src)
-    const dest = ensureFull(
-      flags.dest || args.dest || path.join(src, 'target'),
+    const dest = fsutil.fullPath(
+      flags.dest || args.dest || path.join(srcIsURL ? process.cwd() : src, 'target'),
     )
-
-    if (!(await fse.pathExists(src))) {
-      this.#cmd.error(`Source directory '${src}' not exist!`, {exit: 1})
-    }
-
-    if (!(await fse.lstat(src)).isDirectory()) {
-      this.#cmd.error(`Source directory '${src}' not a dirctory!`, {exit: 2})
-    }
-
     const destExist = await fse.pathExists(dest)
     if (destExist) {
       if (!(await fse.lstat(dest)).isDirectory()) {
@@ -83,7 +100,7 @@ class Env implements EnvType {
     this.#src = src
     this.#dest = dest
 
-    await parser.load()
+    await load(src)
     return true
   }
 }

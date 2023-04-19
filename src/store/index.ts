@@ -16,9 +16,9 @@ import type {Command} from '@oclif/core'
 
 type StoreType = import('./index.d').Store
 class Store implements StoreType {
-  workflows: import('./workflow/index.d').Workflows;
-  dtds: import('./dtd/index.d').Dtds;
-  env: import('./env/index.d').Env;
+  workflows: import('./types/workflow').Workflows;
+  dtds: import('./types/dtd').Dtds;
+  env: import('./types/env').Env;
   private constructor() {
     this.workflows = new Workflows()
     this.dtds = new Dtds()
@@ -40,6 +40,10 @@ class Store implements StoreType {
     }
 
     return true
+  }
+
+  async clear(): Promise<void> {
+    await this.env.clear()
   }
 }
 

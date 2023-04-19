@@ -9,7 +9,8 @@
 // Created On : 16 Apr 2023 By 李竺唐 of 北京飞鹿软件技术研究院
 // File: index
 
-type DtdsType = import('./index.d').Dtds
-class Dtds implements DtdsType {}
+type DtdsType = import('../types/dtd.d').Dtds
+import {CollectionBase} from '../base'
+class Dtds extends CollectionBase implements DtdsType {}
 
 export default Dtds

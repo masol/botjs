@@ -9,7 +9,10 @@
 // Created On : 16 Apr 2023 By 李竺唐 of 北京飞鹿软件技术研究院
 // File: index
 
-type WorkflowsType = import('./index.d').Workflows
-class Workflows implements WorkflowsType {}
+import {CollectionBase} from '../base'
+
+type WorkflowsType = import('../types/workflow.d').Workflows
+
+class Workflows extends CollectionBase implements WorkflowsType {}
 
 export default Workflows

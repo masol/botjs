@@ -10,6 +10,8 @@
 // File: fse
 
 import fse from 'fs-extra'
+import isURL from 'validator/lib/isURL'
+import path from 'node:path'
 
 const fsutil = {
   async isEmptyDir(path: string): Promise<boolean> {
@@ -23,6 +25,20 @@ const fsutil = {
       return false
     }
   },
+  isURL(url: string): boolean {
+    // eslint-disable-next-line camelcase
+    return isURL(url, {require_protocol: true, require_valid_protocol: true})
+  },
+  // 如果pathname不是URL,并且不是绝对路径,则返回base和pathname的拼接路径(如果base为空，则使用process.cwd())
+  fullPath(pathname = '', base = '') :string  {
+    base = base || process.cwd()
+    if (!fsutil.isURL(pathname) && !path.isAbsolute(pathname)) {
+      return path.join(base, pathname)
+    }
+
+    return pathname
+  },
+
 }
 
 export default fsutil
